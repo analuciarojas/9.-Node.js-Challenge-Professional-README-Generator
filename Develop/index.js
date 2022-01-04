@@ -6,8 +6,7 @@ const generateMarkdown = require('./utils/generateMarkdown.js');
 
 
 // TODO: Create an array of questions for user input
-const questions = ()=> {
-    return inquirer.prompt([
+const questions =  [
         {
             type: 'input',
             name: 'title',
@@ -78,7 +77,9 @@ const questions = ()=> {
             name: 'license',
             message: 'Please choose which license you will use for your project (Required)',       
             choices: ['agpl','MIT', 'GNU', 'Apache', 'No license'],
-        },
+        }
+    ];
+
         /*{
             type: 'confirm',
             name: 'confirmCollaborators',
@@ -104,8 +105,6 @@ const questions = ()=> {
 */
         
 
-    ])
-};
 
 
 /*const foorloop = number => {
@@ -138,6 +137,9 @@ function writeToFile(fileName, data) {
 };
 
 //TODO: Create a function to initialize app
+function init() {
+    return inquirer.prompt(questions);
+};
 
 init()
     .then(answers => generateMarkdown(answers))
