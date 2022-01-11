@@ -77,8 +77,66 @@ const questions =  [
             name: 'license',
             message: 'Please choose which license you will use for your project (Required)',       
             choices: ['agpl','MIT', 'GNU', 'Apache', 'No license'],
+        },
+        {
+            type: 'checkbox',
+            name: 'contents',
+            message: 'Any additional sections you would like to include in your README?',
+            choices: [
+                {
+                    name: 'Deployed Application',
+                    checked: false
+                },
+                {
+                    name: 'Installation',
+                    checked: false
+                },
+                {
+                    name: 'Screenshots',
+                    checked: true
+                },
+                {
+                    name: 'Built With',
+                    checked: true
+                },
+                {
+                    name: 'License',
+                    checked: false
+                },
+                {
+                    name: 'Contributing',
+                    checked: false
+                },
+                {
+                    name: 'Tests',
+                    checked: false
+                },
+                {
+                    name: 'Questions',
+                    checked: true
+                },
+                {
+                    name: 'Credits',
+                    checked: true
+                },
+            ]
+        },
+    {
+        type: 'checkbox',
+        name: 'built with',
+        message: 'Please select the technologies that your application was built with.',
+        choices: ['HTML', 'CSS', 'SASS', 'JavaScript', 'Node.js', 'Express.js'],
+        default: 0,
+        when: ({ contents }) => {
+            if (contents.indexOf('Built With') > -1) {
+                return true;
+            } else {
+                return false;
+            }
         }
-    ];
+    }, 
+];
+
 
         /*{
             type: 'confirm',
