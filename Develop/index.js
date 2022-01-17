@@ -5,7 +5,7 @@ const generateMarkdown = require('./utils/generateMarkdown.js');
 
 
 
-// TODO: Create an array of questions for user input
+// TODO: Create an array of questions for user input using validation for required fields
 const questions =  [
         {
             type: 'input',
@@ -59,6 +59,7 @@ const questions =  [
                 }
             }
         },
+        // List input just to choose one option
         {
             type: 'list',
             name: 'license',
@@ -66,6 +67,7 @@ const questions =  [
             message: 'Please choose which license you will use for your project (Required)',       
             choices: ['GNU AGPL v3','GNU GPL v3','GNU LGPL v3', 'Mozilla Public License 2.0','Apache 2.0','mit', 'No license'],
         },
+        // Checkbox for extra readme sections, to make more professional 
         {
             type: 'checkbox',
             name: 'contents',
@@ -89,6 +91,7 @@ const questions =  [
                 },
             ]
         },
+    // Include when, to make sure you selected that additional section 
     {
         type: 'checkbox',
         name: 'builtwith',
@@ -147,13 +150,15 @@ const questions =  [
     },
 ];
 
-const creditQues = [
+// Const to add collaborators who made the application along with their github usernames
+
+const creditQuestions = [
     {
         type: 'input',
-        name: 'creditName',
+        name: 'collabName',
         message: 'What is the name of the collaborator? (Required)',
-        validate: creditName => {
-            if (creditName) {
+        validate: collabName => {
+            if (collabName) {
                 return true;
             } else {
                 console.log('Please enter the collaborators name!');
@@ -163,10 +168,10 @@ const creditQues = [
     },
     {
         type: 'input',
-        name: 'creditLink',
+        name: 'collabGithub',
         message: 'What is the collaborators github username?  (Required)',
-        validate: creditLink => {
-            if (creditLink) {
+        validate: collabGithub => {
+            if (collabGithub) {
                 return true;
             } else {
                 console.log('Please enter the collaborators github username!');
@@ -176,43 +181,48 @@ const creditQues = [
     },
     {
         type: 'confirm',
-        name: 'confirmAddCredit',
+        name: 'confirmNewcollab',
         message: 'Would you like to add another credit?',
         default: false
     }
 ]
 
-addCredits = readmeInfo => {
+// Function to call to ask for the collaborators for credit section 
+
+addCollaborator = creditArray => {
     
-    // initiates array for credits
-    if (!readmeInfo.credits) {
-        readmeInfo.credits = [];
+    // Creates new credits array
+
+    if (!creditArray.credits) {
+        creditArray.credits = [];
     };
     console.log(`
 ==============
-Add New Credit
+Add Collaborator
 ==============
     `);
-    return inquirer.prompt(creditQues)
-    .then(creditData => {
-        // adds credits to array
-        readmeInfo.credits.push(creditData);
-        // will call addCredits again based on user input
-        if (creditData.confirmAddCredit) {
-            return addCredits(readmeInfo);
+    return inquirer.prompt(creditQuestions)
+    .then(collabfeatureArray => {
+        // Pushes name to array 
+        creditArray.credits.push(collabfeatureArray);
+        // If wanted another collaborator it calls addCollaborator function again 
+        if (collabfeatureArray.confirmNewcollab) {
+            return addCollaborator(creditArray);
         } else {
-            return readmeInfo;
+            return creditArray;
         }
     });
 };
 
-const featureQues = [
+// Const to add applications features 
+
+const featureQuestions = [
     {
         type: 'input',
-        name: 'featureName',
+        name: 'featureCount',
         message: 'What is one of your projects features? (Required)',
-        validate: featureName => {
-            if (featureName) {
+        validate: featureCount => {
+            if (featureCount) {
                 return true;
             } else {
                 console.log('Please enter your projects features!');
@@ -228,37 +238,32 @@ const featureQues = [
     }
 ]
 
-addFeatures = Info => {
+// Function to call to ask if you want to add more features 
+
+addFeatures = featureArray => {
     
-    // initiates array for credits
-    if (!Info.features) {
-        Info.features = [];
+    // Creates array for features 
+
+    if (!featureArray.features) {
+        featureArray.features = [];
     };
     console.log(`
 ==============
 Add New Feature
 ==============
     `);
-    return inquirer.prompt(featureQues)
+    return inquirer.prompt(featureQuestions)
     .then(featureData => {
-        // adds credits to array
-        Info.features.push(featureData);
-        // will call addCredits again based on user input
+        // Adds new features to array
+        featureArray.features.push(featureData);
+        // Calls addFeatures if wanted more features
         if (featureData.confirmAddFeature) {
-            return addFeatures(Info);
+            return addFeatures(featureArray);
         } else {
-            return Info;
+            return featureArray;
         }
     });
 };
-
-
-
-// function to initialize program
-function init() {
-    return inquirer.prompt(questions);
-};
-
 
 // TODO: Create a function to write README file
 
@@ -277,9 +282,10 @@ function init() {
 };
 
 init()
-    .then(response => addCredits(response))
+    // Calls collaborator function
+    .then(response => addCollaborator(response))
     .then(responsefeature => {
-    // calls function to add credits based on user selection
+    // Calls feature function if you selected it on the extra sections
     if (responsefeature.contents.indexOf('Features') > -1) {
         return addFeatures(responsefeature);
     } else {
