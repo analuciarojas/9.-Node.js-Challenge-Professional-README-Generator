@@ -1,36 +1,49 @@
-# ana
+# Title
 
   ![badge](https://img.shields.io/badge/license-Apache-blue)
     
 
 ## Description
-  lucia
+  Description
   
 ## Table of Contents
   * [Installation](#installation)
-
+* [Usage](#usage)
 * [Credits](#credits)
-
 * [License](#license)
-
 * [Built With](#built-with)
 
-
 ## Installation
-    To use this application, please follow the following steps:   rojas
+To use this application, please follow the following steps:  Installation
 
-    ## Credits
-    * [ana](https://github.com/analucia)* [bob](https://github.com/bobo)
-    ## License
-    
+
+## Usage
+Instructions
+## Credits
+* [ana](https://github.com/analuciarojas)
+* [bob](https://github.com/bobmarley)
+
+## License
+
   The application is covered under the following license:
   
   [Apache](https://choosealicense.com/licenses/Apache/)
     
     
-    ## Built With
-    * HTML
+## Built With
+* HTML
+
 * CSS
+
 * SASS
 
-    
+* JavaScript
+
+* Node.js
+
+* Express.js
+
+* JQuery
+
+
+

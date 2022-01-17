@@ -13,7 +13,8 @@ const createDescription = description => {
 };
 
 const createInstallation = install => {
-return `To use this application, please follow the following steps:   ${install}
+return `To use this application, please follow the following steps:  ${install}
+
 `
 };
 
@@ -21,7 +22,8 @@ const createCredits = creditItem => {
     let allCredits = '';
     if (creditItem) {
         creditItem.forEach((credit) => {
-    allCredits += `* [${credit.creditName}](https://github.com/${credit.creditLink})`;
+    allCredits += `* [${credit.creditName}](https://github.com/${credit.creditLink})
+`;
         });
         return allCredits;
     } else {
@@ -29,39 +31,19 @@ const createCredits = creditItem => {
     }
 };
 
-/*const createUsage = (usage, screenshots) => {
-  return `${usage} ${createScreenshots(screenshots)}`
+const createUsage = (usage, screenshots) => {
+  return `${usage}`;
 };
-
-const createScreenshots = screenshotItem => {
-  let allScreenshots = '';
-  if (screenshotItem) {
-      screenshotItem.forEach(shot => {
-      allScreenshots += `![${shot.screenshotAlt}](${shot.screenshotLink})
-${shot.screenshotDesc}
-`;
-  });
-  return `${allScreenshots}`;
-  } else {
-      return '';
-  }
-};*/
 
 const createTableOfContents = contentsArr => {
   // creates contents list items based on user selection
   let contentsList = '';
   contentsArr.forEach((item) => {
 
-      // indents 'Screenshots' list item
-      if (item.content && item.header === 'Screenshots') {
-      contentsList += `*[${item.header}](#${(item.header).toLowerCase()})
-`;
-      } else if (item.content) {
-          contentsList += `* [${item.header}](#${(item.header).toLowerCase().split(' ').join('-')})
+if (item.content) {
+    contentsList += `* [${item.header}](#${(item.header).toLowerCase().split(' ').join('-')})
 `;
       }
-      contentsList += `
-`
   });
   return contentsList;
 };
@@ -72,6 +54,7 @@ const createBuiltWith = builtWith =>{
   if (builtWith) {
       builtWith.forEach(item => {
           allTechnologies += `* ${item}
+
 `
       });
       return `${allTechnologies}`;
@@ -130,10 +113,10 @@ function generateMarkdown(data) {
         header: 'Installation',
         content: createInstallation(data.installation)
     },
-    /*{
+    {
         header: 'Usage',
         content: createUsage(data.usage)
-    },*/
+    },
     {
       header: 'Credits',
       content: createCredits(data.credits)
@@ -165,14 +148,10 @@ function generateMarkdown(data) {
     },*/
 ];
   sectionArr.forEach((sectionItem) => {
-    if (sectionItem.content && sectionItem.header === 'Screenshots') {
-        readmeContents += `### ${sectionItem.header}
-  ${sectionItem.content}
-  `
-    } else if (sectionItem.content) {
+    if (sectionItem.content) {
     readmeContents += `## ${sectionItem.header}
-    ${sectionItem.content}
-    `;
+${sectionItem.content}
+`;
     }
   });
 

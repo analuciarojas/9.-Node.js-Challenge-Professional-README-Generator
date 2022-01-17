@@ -60,19 +60,6 @@ const questions =  [
             }
         },
         {
-            type: 'input',
-            name: 'usage',
-            message: 'Provide instructions and examples for use. (Required)',       
-            validate: usageInput => {
-                if (usageInput) {
-                    return true;
-                } else {
-                    console.log('Please provide your usage instructions!');
-                    return false;
-                }
-            }
-        },
-        {
             type: 'checkbox',
             name: 'license',
             message: 'Please choose which license you will use for your project (Required)',       
