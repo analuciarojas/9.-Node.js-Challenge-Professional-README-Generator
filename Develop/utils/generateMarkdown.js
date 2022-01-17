@@ -96,10 +96,32 @@ const createBuiltWith = builtWith =>{
 // Function that returns a license badge based on which license is passed in
 // If there is no license, return an empty string
 const renderLicenseBadge = license => {
-  if (license !== 'no license') {
-    return `
-  ![badge](https://img.shields.io/badge/license-${license}-blue)
-    `;
+  if (license != 'No license') {
+    if(license=='GNU AGPL v3'){
+      return `[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+`;    
+}
+if(license=='GNU GPL v3'){
+  return `[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+`;    
+}
+if(license=='GNU LGPL v3'){
+  return `[![License: LGPL v3](https://img.shields.io/badge/License-LGPL_v3-blue.svg)](https://www.gnu.org/licenses/lgpl-3.0)
+`;    
+}
+if(license=='Mozilla Public License 2.0'){
+  return `[![License: MPL 2.0](https://img.shields.io/badge/License-MPL_2.0-brightgreen.svg)](https://opensource.org/licenses/MPL-2.0)
+`;    
+}
+if(license=='Apache 2.0'){
+  return `[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+`;    
+}
+if(license=='mit'){
+  return `[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+`;    
+}  
+    
   } else {
     return ' ';
   }
@@ -108,10 +130,31 @@ const renderLicenseBadge = license => {
 // Function that returns the license link
 // If there is no license, return an empty string
 const renderLicenseLink = license => {
-  if (license !== 'no license') {
-  return `
-  [${license}](https://choosealicense.com/licenses/${license}/)
-    `;
+  if (license != 'No license') {
+    if(license=='GNU AGPL v3'){
+      return `[${license}](https://www.gnu.org/licenses/agpl-3.0)
+`;    
+}
+if(license=='GNU GPL v3'){
+  return `[${license}](https://www.gnu.org/licenses/gpl-3.0)
+`;    
+}
+if(license=='GNU LGPL v3'){
+  return `[${license}](https://www.gnu.org/licenses/lgpl-3.0)
+`;    
+}
+if(license=='Mozilla Public License 2.0'){
+  return `[${license}](https://opensource.org/licenses/MPL-2.0)
+`;    
+}
+if(license=='Apache 2.0'){
+  return `[${license}](https://opensource.org/licenses/Apache-2.0)
+`;    
+}
+if(license=='mit'){
+  return `[${license}](https://opensource.org/licenses/MIT)
+`;    
+}  
   } else {
     return ' ';
   }
@@ -120,13 +163,14 @@ const renderLicenseLink = license => {
 // Function that returns the license section of README
 // If there is no license, return an empty string
 const renderLicenseSection = license => {
-  if (license !== 'no license') {
+  if (license != 'No license') {
   return `
   The application is covered under the following license:
   ${renderLicenseLink(license)}
     `;
   } else {
-    return ' ';
+    return `This application has no license
+`;
   }
  }
 

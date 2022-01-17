@@ -60,10 +60,11 @@ const questions =  [
             }
         },
         {
-            type: 'checkbox',
+            type: 'list',
             name: 'license',
+            default: 'No license',
             message: 'Please choose which license you will use for your project (Required)',       
-            choices: ['agpl','MIT', 'GNU', 'Apache', 'No license'],
+            choices: ['GNU AGPL v3','GNU GPL v3','GNU LGPL v3', 'Mozilla Public License 2.0','Apache 2.0','mit', 'No license'],
         },
         {
             type: 'checkbox',
