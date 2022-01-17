@@ -84,23 +84,11 @@ const questions =  [
             message: 'Any additional sections you would like to include in your README?',
             choices: [
                 {
-                    name: 'Deployed Application',
-                    checked: false
-                },
-                {
-                    name: 'Installation',
-                    checked: false
-                },
-                {
-                    name: 'Screenshots',
-                    checked: true
-                },
-                {
                     name: 'Built With',
-                    checked: true
+                    checked: false
                 },
                 {
-                    name: 'License',
+                    name: 'Features',
                     checked: false
                 },
                 {
@@ -111,21 +99,13 @@ const questions =  [
                     name: 'Tests',
                     checked: false
                 },
-                {
-                    name: 'Questions',
-                    checked: true
-                },
-                {
-                    name: 'Credits',
-                    checked: true
-                },
             ]
         },
     {
         type: 'checkbox',
-        name: 'built with',
+        name: 'builtwith',
         message: 'Please select the technologies that your application was built with.',
-        choices: ['HTML', 'CSS', 'SASS', 'JavaScript', 'Node.js', 'Express.js'],
+        choices: ['HTML', 'CSS', 'SASS', 'JavaScript', 'Node.js', 'Express.js', 'JQuery'],
         default: 0,
         when: ({ contents }) => {
             if (contents.indexOf('Built With') > -1) {
@@ -137,51 +117,72 @@ const questions =  [
     }, 
 ];
 
-
-        /*{
-            type: 'confirm',
-            name: 'confirmCollaborators',
-            message: 'Did you collaborate with other persons for this project?',
-            default: false
-        },
-        {
-            type: 'input',
-            name: 'numberCollaborators',
-            message: 'How many persons collaborated on this project?',
-            when: ({ confirmCollaborators }) => confirmCollaborators
-        },
-        {
-            type: 'input',
-            name: 'collaboratorName',
-            message: 'Enter name for collaborator number #${(i+1)}',       
-        },
-        {
-            type: 'input',
-            name: 'collaboratorGitHub',
-            message: 'Enter github for collaborator number #${(i+1)}',       
-        },
-*/
-        
-
-
-
-/*const foorloop = number => {
-
-    for(let i=0;i<number;i++){
-        return inquirer.prompt([
-            {
-                type: 'input',
-                name: `${(i+1)}collaboratorName`,
-                message: `Enter name for collaborator number #${(i+1)}`,       
-            },
-            {
-                type: 'input',
-                name: `${(i+1)}collaboratorGithub`,
-                message: `Enter github for collaborator number #${(i+1)}`,       
-            },
-        ]);
+const creditQues = [
+    {
+        type: 'input',
+        name: 'creditName',
+        message: 'What is the name of the collaborator? (Required)',
+        validate: creditName => {
+            if (creditName) {
+                return true;
+            } else {
+                console.log('Please enter the collaborators name!');
+                return false;
+            }
+        }
+    },
+    {
+        type: 'input',
+        name: 'creditLink',
+        message: 'What is the collaborators github username?  (Required)',
+        validate: creditLink => {
+            if (creditLink) {
+                return true;
+            } else {
+                console.log('Please enter the collaborators github username!');
+                return false;
+            }
+        }
+    },
+    {
+        type: 'confirm',
+        name: 'confirmAddCredit',
+        message: 'Would you like to add another credit?',
+        default: false
     }
-}*/
+]
+
+addCredits = readmeInfo => {
+    
+    // initiates array for credits
+    if (!readmeInfo.credits) {
+        readmeInfo.credits = [];
+    };
+    console.log(`
+==============
+Add New Credit
+==============
+    `);
+    return inquirer.prompt(creditQues)
+    .then(creditData => {
+        // adds credits to array
+        readmeInfo.credits.push(creditData);
+        // will call addCredits again based on user input
+        if (creditData.confirmAddCredit) {
+            return addCredits(readmeInfo);
+        } else {
+            return readmeInfo;
+        }
+    });
+};
+
+
+
+// function to initialize program
+function init() {
+    return inquirer.prompt(questions);
+};
+
 
 // TODO: Create a function to write README file
 
@@ -200,6 +201,7 @@ function init() {
 };
 
 init()
+    .then(response => addCredits(response))
     .then(answers => generateMarkdown(answers))
     .then(generatedReadme => writeToFile('README.md', generatedReadme))
     .catch(err => {
