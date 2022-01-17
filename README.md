@@ -88,6 +88,6 @@ This is a an image of a professional generated README file using this applicatio
 
 ## Links
 
-* [URL of the Youtube video]()
+* [URL of the Youtube video](https://youtu.be/suF5AoZFQFE)
 
 * [URL of the GitHub repository](https://github.com/analuciarojas/9.-Node.js-Challenge-Professional-README-Generator)

@@ -1,9 +1,9 @@
-# a
-[![License: LGPL v3](https://img.shields.io/badge/License-LGPL_v3-blue.svg)](https://www.gnu.org/licenses/lgpl-3.0)
+# Node.js Professional README Generator
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 
 ## Description
-  b
+  This project consists on creating a simple way to generate README files by using the command line and inquirer.
   
 ## Table of Contents
   * [Installation](#installation)
@@ -12,37 +12,38 @@
 * [License](#license)
 * [Built With](#built-with)
 * [Features](#features)
+* [Contributing](#contributing)
 
 ## Installation
-To use this application, please follow the following steps:  c
+To use this application, please follow the following steps:  In order to install this application you must run npm install inquirer.
 
 
 ## Usage
-d
+After installing inquierer, you need to locate yourself on the index file and open the integrated terminal, next type node index and follow the instructions provided. 
 
 ## Credits
-* [ana](https://github.com/analuciarojas)
+* [Ana Lucia Rojas](https://github.com/analuciarojas)
 
 ## License
 
   The application is covered under the following license:
-  [GNU LGPL v3](https://www.gnu.org/licenses/lgpl-3.0)
+  [mit](https://opensource.org/licenses/MIT)
 
     
 ## Built With
-* HTML
-
-* CSS
-
-* SASS
-
 * JavaScript
+
+* Node.js
 
 
 ## Features
-* fature1
+* It can link to the license offitial page
 
-* feature2
+* It can also link to collaborators git hub accounts
 
+
+## Contributing
+To contribute to this application, please follow the following guidelines:  There are currently no guidelines to contribute to this application. 
+  
 
 
