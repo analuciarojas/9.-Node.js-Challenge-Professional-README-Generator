@@ -68,6 +68,14 @@ const createBuiltWith = builtWith =>{
   };
 };
 
+const createLicense = license => {
+  if (license) {
+      return `This application is licensed under the ${license} license.`;
+  } else {
+      return '';
+  }
+};
+
 
 // TODO: Create a function to generate markdown for README
 function generateMarkdown(data) {
@@ -89,10 +97,10 @@ function generateMarkdown(data) {
         header: 'Built With',
         content: createBuiltWith(data.builtwith)
     },
-    /*{
+    {
         header: 'License',
         content: createLicense(license)
-    },
+    },/*
     {
         header: 'Contributing', 
         content: data.contributing 
