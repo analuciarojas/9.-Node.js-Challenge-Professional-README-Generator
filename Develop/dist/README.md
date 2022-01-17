@@ -1,10 +1,10 @@
-# Title
+# ana
 
-  ![badge](https://img.shields.io/badge/license-Apache-blue)
+  ![badge](https://img.shields.io/badge/license-No license-blue)
     
 
 ## Description
-  Description
+  lucia
   
 ## Table of Contents
   * [Installation](#installation)
@@ -12,22 +12,26 @@
 * [Credits](#credits)
 * [License](#license)
 * [Built With](#built-with)
+* [Features](#features)
+* [Contributing](#contributing)
+* [Tests](#tests)
 
 ## Installation
-To use this application, please follow the following steps:  Installation
+To use this application, please follow the following steps:  rojas
 
 
 ## Usage
-Instructions
+rivas
 ## Credits
 * [ana](https://github.com/analuciarojas)
-* [bob](https://github.com/bobmarley)
+* [b](https://github.com/bob)
+* [marley](https://github.com/m)
 
 ## License
 
   The application is covered under the following license:
   
-  [Apache](https://choosealicense.com/licenses/Apache/)
+  [No license](https://choosealicense.com/licenses/No license/)
     
     
 ## Built With
@@ -45,5 +49,19 @@ Instructions
 
 * JQuery
 
+
+## Features
+* feature1
+
+* feature2
+
+
+## Contributing
+To contribute to this application, please follow the following guidelines:  guideliness for new contributors
+  
+
+## Tests
+tests and examples
+    
 
 

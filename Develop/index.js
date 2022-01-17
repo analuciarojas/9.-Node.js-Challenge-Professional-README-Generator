@@ -102,6 +102,48 @@ const questions =  [
             }
         }
     }, 
+    {
+        type: 'input',
+        name: 'contributing',
+        message: 'Provide guidelines for other developers to contribute to this application. (Required)',       
+        default: 0,
+        when: ({ contents }) => {
+            if (contents.indexOf('Contributing') > -1) {
+                return true;
+            } else {
+                return false;
+            }
+        },
+        validate: contributingInput => {
+            if (contributingInput) {
+                return true;
+            } else {
+                console.log('Please provide your contributing guidelines!');
+                return false;
+            }
+        }
+    },
+    {
+        type: 'input',
+        name: 'tests',
+        message: 'Provide tests for your application and examples on how to run them. (Required)',       
+        default: 0,
+        when: ({ contents }) => {
+            if (contents.indexOf('Tests') > -1) {
+                return true;
+            } else {
+                return false;
+            }
+        },
+        validate: testsInput => {
+            if (testsInput) {
+                return true;
+            } else {
+                console.log('Please provide tests and examples!');
+                return false;
+            }
+        }
+    },
 ];
 
 const creditQues = [
@@ -163,6 +205,52 @@ Add New Credit
     });
 };
 
+const featureQues = [
+    {
+        type: 'input',
+        name: 'featureName',
+        message: 'What is one of your projects features? (Required)',
+        validate: featureName => {
+            if (featureName) {
+                return true;
+            } else {
+                console.log('Please enter your projects features!');
+                return false;
+            }
+        }
+    },
+    {
+        type: 'confirm',
+        name: 'confirmAddFeature',
+        message: 'Would you like to add another feature?',
+        default: false
+    }
+]
+
+addFeatures = Info => {
+    
+    // initiates array for credits
+    if (!Info.features) {
+        Info.features = [];
+    };
+    console.log(`
+==============
+Add New Feature
+==============
+    `);
+    return inquirer.prompt(featureQues)
+    .then(featureData => {
+        // adds credits to array
+        Info.features.push(featureData);
+        // will call addCredits again based on user input
+        if (featureData.confirmAddFeature) {
+            return addFeatures(Info);
+        } else {
+            return Info;
+        }
+    });
+};
+
 
 
 // function to initialize program
@@ -189,6 +277,14 @@ function init() {
 
 init()
     .then(response => addCredits(response))
+    .then(responsefeature => {
+    // calls function to add credits based on user selection
+    if (responsefeature.contents.indexOf('Features') > -1) {
+        return addFeatures(responsefeature);
+    } else {
+        return responsefeature;
+    }
+    })
     .then(answers => generateMarkdown(answers))
     .then(generatedReadme => writeToFile('README.md', generatedReadme))
     .catch(err => {

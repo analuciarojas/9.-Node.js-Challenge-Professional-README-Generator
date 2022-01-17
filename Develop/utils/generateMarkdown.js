@@ -18,6 +18,21 @@ return `To use this application, please follow the following steps:  ${install}
 `
 };
 
+const createContributing = contributing => {
+  if (contributing) {
+
+  return `To contribute to this application, please follow the following guidelines:  ${contributing}
+  
+`
+  }};
+
+const createTests = tests => {
+  if (tests) {
+    return `${tests}
+    
+`
+}};
+
 const createCredits = creditItem => {
     let allCredits = '';
     if (creditItem) {
@@ -31,7 +46,21 @@ const createCredits = creditItem => {
     }
 };
 
-const createUsage = (usage, screenshots) => {
+const createFeatures = featureItem => {
+  let allFeatures = '';
+  if (featureItem) {
+    featureItem.forEach((feature) => {
+      allFeatures += `* ${feature.featureName}
+
+`;
+      });
+      return allFeatures;
+  } else {
+      return '';
+  }
+};
+
+const createUsage = usage => {
   return `${usage}`;
 };
 
@@ -40,7 +69,7 @@ const createTableOfContents = contentsArr => {
   let contentsList = '';
   contentsArr.forEach((item) => {
 
-if (item.content) {
+if (item.content && item.content!='') {
     contentsList += `* [${item.header}](#${(item.header).toLowerCase().split(' ').join('-')})
 `;
       }
@@ -104,8 +133,6 @@ const renderLicenseSection = license => {
 // TODO: Create a function to generate markdown for README
 function generateMarkdown(data) {
 
-  const { title, github, repo, license } = data;
-
   let readmeContents = '';
 
   const sectionArr = [
@@ -129,23 +156,18 @@ function generateMarkdown(data) {
         header: 'Built With',
         content: createBuiltWith(data.builtwith)
     },
-    /*
     {
-        header: 'Contributing', 
-        content: data.contributing 
+        header: 'Features', 
+        content: createFeatures(data.features)
     },
     {
-        header: 'Tests',
-        content: createTest(data.tests)
+      header: 'Contributing', 
+      content: createContributing(data.contributing)
     },
     {
-        header: 'Questions',
-        content: createQuestions(data.questions, github, repo)
+      header: 'Tests', 
+      content: createTests(data.tests)
     },
-    {
-        header: 'Credits',
-        content: createCredits(data.credits)
-    },*/
 ];
   sectionArr.forEach((sectionItem) => {
     if (sectionItem.content) {
